@@ -71,7 +71,7 @@ public class MissionCreator : EditorWindow {
         GameObject missionParent = GameObject.Find(m_MissionName);
         if (missionParent == null)
         {
-            missionParent = Instantiate<GameObject>(new GameObject());
+            missionParent = new GameObject();
             missionParent.name = m_MissionName;
             missionParent.AddComponent<Mission>();
         }
@@ -79,7 +79,7 @@ public class MissionCreator : EditorWindow {
         foreach(Shelf shelf in selectedShelfs)
         {
             //Create task
-            GameObject task = Instantiate<GameObject>(new GameObject());
+            GameObject task = new GameObject();
             task.name = "Task";
             task.transform.parent = missionParent.transform;
             task.AddComponent<Task>();
@@ -89,6 +89,9 @@ public class MissionCreator : EditorWindow {
             missionParent.GetComponent<Mission>().Tasks.Add(task.GetComponent<Task>());
         }
 
-        m_MissionManager.missions.Enqueue(missionParent.GetComponent<Mission>());
+        //Put mission into mission manager
+        missionParent.transform.parent = m_MissionManager.transform;
+        m_MissionManager.AllMissions.Add(missionParent.GetComponent<Mission>());
+        m_MissionManager.RemainingMissions.Enqueue(missionParent.GetComponent<Mission>());
     }
 }

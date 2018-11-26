@@ -20,6 +20,9 @@ public class Task : MonoBehaviour {
 
     private void OnShelfDone()
     {
-
+        if (OnComplete != null)
+        {
+            OnComplete.Invoke();
+        }
     }
 }
