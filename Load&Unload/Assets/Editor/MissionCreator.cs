@@ -15,6 +15,8 @@ public class MissionCreator : EditorWindow {
     public static void ShowWindow()
     {
         EditorWindow.GetWindow(typeof(MissionCreator));
+        
+        
     }
 
     private void OnGUI()
@@ -45,6 +47,7 @@ public class MissionCreator : EditorWindow {
     private bool GetMissionManager()
     {
         m_MissionManager = GameObject.FindObjectOfType<MissionManager>();
+        EditorUtility.SetDirty(m_MissionManager);
 
         if (m_MissionManager != null)
         {
@@ -93,5 +96,6 @@ public class MissionCreator : EditorWindow {
         missionParent.transform.parent = m_MissionManager.transform;
         m_MissionManager.AllMissions.Add(missionParent.GetComponent<Mission>());
         m_MissionManager.RemainingMissions.Enqueue(missionParent.GetComponent<Mission>());
+        
     }
 }

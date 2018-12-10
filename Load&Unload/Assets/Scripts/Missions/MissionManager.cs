@@ -7,7 +7,8 @@ using UnityEngine.UI;
 
 public class MissionManager : MonoBehaviour {
 
-    public List<Mission> AllMissions = new List<Mission>();
+    [SerializeField]
+    public List<Mission> AllMissions;
     public Queue<Mission> RemainingMissions = new Queue<Mission>();
 
     [SerializeField]
@@ -36,6 +37,15 @@ public class MissionManager : MonoBehaviour {
 
     void UpdateUI(Mission mission)
     {
+        foreach(Transform child in m_TasksLayoutGroup.transform)
+        {
+            Destroy(child);
+        }
 
+        foreach (Task task in mission.Tasks)
+        {
+            Text text = Instantiate<Text>(m_TaskTextPrefab, m_TasksLayoutGroup);
+            text.text = "Fill: " + task.shelfToFill.name;
+        }
     }
 }
