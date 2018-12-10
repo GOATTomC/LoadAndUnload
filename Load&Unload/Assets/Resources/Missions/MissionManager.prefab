@@ -52,3 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AllMissions: []
+  m_TasksLayoutGroup: {fileID: 0}
+  m_TaskTextPrefab: {fileID: 114706345654244424, guid: ff1da8438e64a8042a517cb077a5b78b,
+    type: 2}
