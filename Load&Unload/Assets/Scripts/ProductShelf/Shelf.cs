@@ -12,15 +12,21 @@ public class Shelf : MonoBehaviour {
     private int m_ProductAmount;
 
     [SerializeField]
-    private string m_ProductName;
+    private ScriptableProduct m_Product;
 
     private List<ProductInfo> m_Products;
 
+
+    private void Start()
+    {
+        m_Products = new List<ProductInfo>();
+    }
+
     // Called when product is dropped into shelf
-    private void AddProduct(ProductInfo product)
+    public void AddProduct(ProductInfo product)
     {
         //Check if we want this product in this shelf
-        if (product.ProductName == m_ProductName)
+        if (product.Product.productName == m_Product.name)
         {
             m_Products.Add(product);
 
@@ -34,7 +40,7 @@ public class Shelf : MonoBehaviour {
         }
     }
 
-    private void RemoveProduct(ProductInfo product)
+    public void RemoveProduct(ProductInfo product)
     {
         if (m_Products.Contains(product))
         {

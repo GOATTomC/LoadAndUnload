@@ -2,15 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public abstract class Interactable : MonoBehaviour {
 
-    public PlayerOption playerOption;
+    private Rigidbody m_myRigidbody;
 
-    public enum PlayerOption
+    public Rigidbody GetRigidbody
     {
-        Pickup,
-        Drag
-    };
+        get
+        {
+            return m_myRigidbody;
+        }
+    }
+
+    protected virtual void Awake()
+    {
+        m_myRigidbody = GetComponent<Rigidbody>();
+    }
 
     public abstract void Equip(PlayerHand hand);
 

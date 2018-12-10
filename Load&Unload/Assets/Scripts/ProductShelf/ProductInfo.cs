@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class ProductInfo : MonoBehaviour {
 
-    public string ProductName;
+    public ScriptableProduct Product;
 }

@@ -43,6 +43,7 @@ public class PlayerHand : MonoBehaviour {
         {
             DequipInteractable();
         }
+
     }
 
 
@@ -89,7 +90,7 @@ public class PlayerHand : MonoBehaviour {
             interactable.Equip(this);
             m_itemInHand = interactable;
 
-            if(interactable.playerOption == Interactable.PlayerOption.Pickup)
+            if(interactable is Pickup)
             {
                 PutItemInHand(interactable);
             }
@@ -106,10 +107,12 @@ public class PlayerHand : MonoBehaviour {
             m_itemInHand.Dequip(this);
 
             //let go off interactable if you can pick it up
-            if (m_itemInHand.playerOption == Interactable.PlayerOption.Pickup)
+            if (m_itemInHand is Pickup)
             {
                 RemoveItemInHand();
             }
+
+            m_itemInHand.GetRigidbody.AddForce(m_controller.velocity);
             m_itemInHand = null;
             Debug.Log("Dequiping Item");
         }
