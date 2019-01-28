@@ -22,12 +22,12 @@ public class Pool : MonoBehaviour {
         float multiplier = m_startSize / m_size;
         m_size -= amount * multiplier;
         transform.localScale = m_startScale * (m_size / m_startSize);
-        if(m_size < 0)
+        if(m_size < 0.1)
         {
             m_size = 0;
             if (OnCleaningFinished != null)
             {
-                OnCleaningFinished();
+                OnCleaningFinished.Invoke();
             }
             Destroy(gameObject);
         }

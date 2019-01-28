@@ -52,7 +52,12 @@ public class MissionManager : MonoBehaviour {
         foreach (Task task in mission.Tasks)
         {
             Text text = Instantiate<Text>(m_TaskTextPrefab, m_TasksLayoutGroup);
-            text.text = "Fill: " + task.shelfToFill.name;
+            if (task.shelfToFill != null)
+                text.text = "Fill: " + task.shelfToFill.name;
+            else
+            {
+                text.text = "Clean: " + task.poolToCLean.name;
+            }
         }
     }
 }

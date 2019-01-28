@@ -22,7 +22,7 @@ public class MissionCreator : EditorWindow {
     private void OnGUI()
     {
         m_MissionName = EditorGUILayout.TextField("Mission name: ", m_MissionName);
-        EditorGUILayout.LabelField("Select shelfs to fill and press create.");
+        EditorGUILayout.LabelField("Select shelfs and pools to fill and press create.");
 
         if (GUILayout.Button("Create"))
         {
@@ -61,6 +61,7 @@ public class MissionCreator : EditorWindow {
     {
         GameObject[] selectedObjects = Selection.gameObjects;
         List<Shelf> selectedShelfs = new List<Shelf>();
+        List<Pool> selectedPools = new List<Pool>();
         
         for (int i = 0; i < selectedObjects.Length; i++)
         {
@@ -68,6 +69,11 @@ public class MissionCreator : EditorWindow {
             if (shelf != null)
             {
                 selectedShelfs.Add(shelf);
+            }
+            Pool pool = selectedObjects[i].GetComponent<Pool>();
+            if (pool != null)
+            {
+                selectedPools.Add(pool);
             }
         }
 
@@ -89,6 +95,17 @@ public class MissionCreator : EditorWindow {
             task.GetComponent<Task>().shelfToFill = shelf;
 
             //Add task to mission
+            missionParent.GetComponent<Mission>().Tasks.Add(task.GetComponent<Task>());
+        }
+
+        foreach(Pool pool in selectedPools)
+        {
+            GameObject task = new GameObject();
+            task.name = "Task";
+            task.transform.parent = missionParent.transform;
+            task.AddComponent<Task>();
+            task.GetComponent<Task>().poolToCLean = pool;
+
             missionParent.GetComponent<Mission>().Tasks.Add(task.GetComponent<Task>());
         }
 
