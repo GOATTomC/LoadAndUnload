@@ -31,7 +31,11 @@ public class MissionManager : MonoBehaviour {
     private void OnMissionDone()
     {
         RemainingMissions.Dequeue();
-        Mission Currentmission = RemainingMissions.Peek();
+        Mission Currentmission = null;
+        if (RemainingMissions.Count > 0)
+        {
+            RemainingMissions.Peek();
+        }
         UpdateUI(Currentmission);
     }
 
@@ -39,8 +43,11 @@ public class MissionManager : MonoBehaviour {
     {
         foreach(Transform child in m_TasksLayoutGroup.transform)
         {
-            Destroy(child);
+            Destroy(child.gameObject);
         }
+
+        if (mission == null)
+            return;
 
         foreach (Task task in mission.Tasks)
         {

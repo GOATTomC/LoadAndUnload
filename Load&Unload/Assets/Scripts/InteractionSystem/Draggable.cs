@@ -9,11 +9,6 @@ public class Draggable :Interactable {
     private PlayerHand m_handGrabbedBy;
     private Rigidbody m_myRigid;
 
-    private void Awake()
-    {
-        m_myRigid = GetComponent<Rigidbody>();
-    }
-
     public override void Dequip(PlayerHand hand)
     {
         m_handGrabbedBy = null;   

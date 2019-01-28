@@ -28,13 +28,17 @@ public class Pickup : Interactable
     public override void OnHoverEnter(PlayerHand hand)
     {
         //set highlightcolor
-        m_meshRenderer.material.mainTexture = m_highlightTexture;
+        if (m_highlightTexture)
+        {
+            m_meshRenderer.material.mainTexture = m_highlightTexture;
+        }
     }
 
     public override void OnHoverExit(PlayerHand hand)
     {
         //set defaultcolor
-        m_meshRenderer.material.mainTexture = m_standardTexture;
+            m_meshRenderer.material.mainTexture = m_standardTexture;
+        
     }
 
 

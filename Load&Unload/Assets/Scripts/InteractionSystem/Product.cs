@@ -12,7 +12,6 @@ public class Product : Pickup {
 
     protected override void Awake()
     {
-        Debug.Log("wat");
         base.Awake();
         m_myProductInfo = GetComponent<ProductInfo>();
     }
@@ -21,12 +20,11 @@ public class Product : Pickup {
     public void OnTriggerEnter(Collider other)
     {
         Shelf shelf = other.GetComponent<Shelf>();
-        if (shelf)
+     if (shelf)
         {
             shelf.AddProduct(m_myProductInfo);
         }
     }
-
     public void OnTriggerExit(Collider other)
     {
         Shelf shelf = other.GetComponent<Shelf>();

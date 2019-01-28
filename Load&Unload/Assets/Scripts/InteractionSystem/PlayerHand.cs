@@ -47,6 +47,21 @@ public class PlayerHand : MonoBehaviour {
     }
 
 
+    private void OnCollisionExit(Collision collision)
+    {
+        Interactable interactable = collision.transform.GetComponent<Interactable>();
+
+        if (interactable)
+        {
+            if (interactable == m_lastHoverItem)
+            {
+                m_lastHoverItem.OnHoverExit(this);
+            }
+        }
+                    
+    }
+
+
 
     private void OnCollisionStay(Collision collision)
     {
@@ -104,6 +119,7 @@ public class PlayerHand : MonoBehaviour {
         if (m_itemInHand != null)
         {
             m_myCollider.enabled = true;
+            m_itemInHand.OnHoverExit(this);
             m_itemInHand.Dequip(this);
 
             //let go off interactable if you can pick it up

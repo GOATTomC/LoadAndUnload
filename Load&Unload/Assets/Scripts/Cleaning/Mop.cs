@@ -42,7 +42,6 @@ public class Mop : Pickup {
             }
         }
     }
-
     private void OnTriggerExit(Collider other)
     {
 
